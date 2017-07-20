@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://Resources/grass_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Scripts/world.gd" type="Script" id=2]
 [ext_resource path="res://Prefabs/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Images/crosshair.png" type="Texture" id=4]
+[ext_resource path="res://Prefabs/snatcher.tscn" type="PackedScene" id=5]
 
 [node name="world" type="Node2D"]
 
@@ -34,5 +35,9 @@ transform/pos = Vector2( 95.7678, 98.1679 )
 
 transform/pos = Vector2( -53.446, -41.7547 )
 texture = ExtResource( 4 )
+
+[node name="snatcher" parent="TileMap" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 509.635, 371.763 )
 
 

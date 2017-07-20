@@ -2,6 +2,7 @@ extends Node2D
 
 const player = preload("res://Prefabs/player.tscn")
 const poop = preload("res://Prefabs/poop.tscn")
+const snatcher = preload("res://Prefabs/snatcher.tscn")
 
 var playerNode
 var counter = 0
@@ -10,9 +11,12 @@ var mousePos = Vector2(-100, -100)
 func _ready():
 	playerNode = get_node("player")
 	playerNode.add_to_group("Entity")
+	get_node("snatcher").add_to_group("Enemy")
+	get_node("snatcher").add_to_group("Entity")
 	set_process(true)
 
 func _process(delta):
+	updateAI()
 	updateEntities(delta)
 	updateCrosshair()
 	handleShooting(delta)	
@@ -48,3 +52,8 @@ func handleShooting(delta):
 		poopNode.call("setVelocity", shootDirection)
 		poopNode.add_to_group("Entity")
 		counter = 0
+		
+func updateAI():
+	# Inform enemies of player's current position
+	for enemy in get_tree().get_nodes_in_group("Enemy"):
+		enemy.getPlayerPosition(playerNode.get_pos())
