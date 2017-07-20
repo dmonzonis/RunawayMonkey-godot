@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Scripts/poop.gd" type="Script" id=1]
+[ext_resource path="res://Images/poop.png" type="Texture" id=2]
+
+
+[node name="Node2D" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="poop" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+
+
