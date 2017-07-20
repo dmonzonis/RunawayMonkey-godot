@@ -9,19 +9,11 @@ var mousePos = Vector2(-100, -100)
 
 func _ready():
 	playerNode = get_node("player")
+	playerNode.add_to_group("Entity")
 	set_process(true)
 
 func _process(delta):
-	# Move player
-	var playerPos = playerNode.get_pos()
-	playerNode.call("update", delta)
-	var newPlayerPos = playerPos + playerNode.velocity * delta
-	playerNode.set_pos(newPlayerPos)
-	
-	# Move projectiles
-	for projectile in get_tree().get_nodes_in_group("Projectiles"):
-		projectile.update(delta)
-		projectile.set_pos(projectile.get_pos() + projectile.velocity * delta)
+	updateEntities(delta)
 	
 	# Position crosshair and make player look at it
 	var crosshair = get_node("crosshair")
@@ -35,6 +27,7 @@ func _process(delta):
 		playerNode.orientation = 1 if playerNode.orientation == 0 else 0  # Switch orientation
 	
 	# Shooting
+	var playerPos = playerNode.get_pos()
 	if counter < playerNode.cooldown:
 		counter += delta
 	elif Input.is_action_pressed("fire"):
@@ -43,5 +36,10 @@ func _process(delta):
 		add_child(poopNode)
 		poopNode.set_pos(playerPos)
 		poopNode.call("setVelocity", shootDirection)
-		poopNode.add_to_group("Projectiles")
+		poopNode.add_to_group("Entity")
 		counter = 0
+
+func updateEntities(delta):
+	for entity in get_tree().get_nodes_in_group("Entity"):
+		entity.update(delta)
+		entity.set_pos(entity.get_pos() + entity.velocity * delta)
