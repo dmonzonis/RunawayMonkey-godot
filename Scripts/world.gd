@@ -14,8 +14,17 @@ func _ready():
 
 func _process(delta):
 	updateEntities(delta)
-	
-	# Position crosshair and make player look at it
+	updateCrosshair()
+	handleShooting(delta)	
+
+# Handle entity updating and movement
+func updateEntities(delta):
+	for entity in get_tree().get_nodes_in_group("Entity"):
+		entity.update(delta)
+		entity.set_pos(entity.get_pos() + entity.velocity * delta)
+		
+# Set crosshair to mouse's position and make player look at crosshair's direction
+func updateCrosshair():
 	var crosshair = get_node("crosshair")
 	mousePos = get_global_mouse_pos()
 	crosshair.set_pos(mousePos)
@@ -25,8 +34,9 @@ func _process(delta):
 	or (playerNode.orientation == playerNode.ORIENTATION_RIGHT and lookDirection < 0)):
 		playerNode.scale(Vector2(-1, 1))
 		playerNode.orientation = 1 if playerNode.orientation == 0 else 0  # Switch orientation
-	
-	# Shooting
+
+# If shooting is not on cooldown, shoot a projectile in the crosshair's direction
+func handleShooting(delta):
 	var playerPos = playerNode.get_pos()
 	if counter < playerNode.cooldown:
 		counter += delta
@@ -38,8 +48,3 @@ func _process(delta):
 		poopNode.call("setVelocity", shootDirection)
 		poopNode.add_to_group("Entity")
 		counter = 0
-
-func updateEntities(delta):
-	for entity in get_tree().get_nodes_in_group("Entity"):
-		entity.update(delta)
-		entity.set_pos(entity.get_pos() + entity.velocity * delta)
