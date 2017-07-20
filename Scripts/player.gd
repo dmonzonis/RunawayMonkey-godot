@@ -4,7 +4,8 @@ var speed = 250
 var velocity = Vector2(0, 0)
 var cooldown = 0.30
 var shootingSpeed = 500
-enum orientation {LEFT, RIGHT}
+enum {ORIENTATION_LEFT, ORIENTATION_RIGHT}
+var orientation = ORIENTATION_RIGHT
 
 func _ready():
 	pass

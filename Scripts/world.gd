@@ -23,9 +23,16 @@ func _process(delta):
 		projectile.update(delta)
 		projectile.set_pos(projectile.get_pos() + projectile.velocity * delta)
 	
-	# Crosshair
+	# Position crosshair and make player look at it
+	var crosshair = get_node("crosshair")
 	mousePos = get_global_mouse_pos()
-	get_node("crosshair").set_pos(mousePos)
+	crosshair.set_pos(mousePos)
+	var lookDirection = crosshair.get_pos().x - playerNode.get_pos().x
+	# Flip player if crosshair is behind
+	if ((playerNode.orientation == playerNode.ORIENTATION_LEFT and lookDirection > 0) 
+	or (playerNode.orientation == playerNode.ORIENTATION_RIGHT and lookDirection < 0)):
+		playerNode.scale(Vector2(-1, 1))
+		playerNode.orientation = 1 if playerNode.orientation == 0 else 0  # Switch orientation
 	
 	# Shooting
 	if counter < playerNode.cooldown:
