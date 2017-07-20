@@ -4,6 +4,7 @@ var speed = 250
 var velocity = Vector2(0, 0)
 var cooldown = 0.30
 var shootingSpeed = 500
+enum orientation {LEFT, RIGHT}
 
 func _ready():
 	pass
@@ -18,3 +19,6 @@ func modifyVelocity(delta):
 		velocity.x -= speed
 	if (Input.is_action_pressed("move_right")):
 		velocity.x += speed
+
+func update(delta):
+	modifyVelocity(delta)

@@ -14,9 +14,9 @@ func _ready():
 func _process(delta):
 	# Move player
 	var playerPos = playerNode.get_pos()
-	playerNode.call("modifyVelocity", delta)
+	playerNode.call("update", delta)
 	var newPlayerPos = playerPos + playerNode.velocity * delta
-	get_node("player").set_pos(newPlayerPos)
+	playerNode.set_pos(newPlayerPos)
 	
 	# Move projectiles
 	for projectile in get_tree().get_nodes_in_group("Projectiles"):
