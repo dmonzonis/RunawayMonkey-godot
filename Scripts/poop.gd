@@ -1,11 +1,10 @@
-extends Node2D
+extends "entity.gd"
 
-var speed = 400
-var velocity
 const LIFETIME = 1.5
 var lifeCounter
 
 func _ready():
+	speed = 400
 	lifeCounter = 0
 	
 func setVelocity(direction):

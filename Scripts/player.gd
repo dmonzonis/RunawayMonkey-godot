@@ -1,14 +1,10 @@
-extends Node2D
+extends "entity.gd"
 
-var speed = 250
-var velocity = Vector2(0, 0)
 var cooldown = 0.30
 var shootingSpeed = 500
-enum {ORIENTATION_LEFT, ORIENTATION_RIGHT}
-var orientation = ORIENTATION_RIGHT
 
 func _ready():
-	pass
+	speed = 250
 	
 func modifyVelocity(delta):
 	velocity = Vector2(0, 0)
