@@ -1,4 +1,4 @@
-extends Node2D
+extends KinematicBody2D
 
 var speed
 var velocity = Vector2(0, 0)

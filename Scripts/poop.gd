@@ -14,4 +14,3 @@ func update(delta):
 	lifeCounter += delta
 	if lifeCounter >= LIFETIME:
 		self.queue_free()
-

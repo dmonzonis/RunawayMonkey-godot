@@ -19,13 +19,27 @@ func _process(delta):
 	updateAI()
 	updateEntities(delta)
 	updateCrosshair()
-	handleShooting(delta)	
+	handleShooting(delta)
+	handleCollisions()
+
+func handleCollisions():
+	if playerNode.is_colliding():
+		var other = playerNode.get_collider()
+		if other.is_in_group("Enemy"):
+			# TODO: damage player
+			other.queue_free()
+	for projectile in get_tree().get_nodes_in_group("Projectile"):
+		if projectile.is_colliding():
+			# If poop touches enemy, damage it
+			var other = projectile.get_collider()
+			if other.is_in_group("Enemy"):
+				other.queue_free()
 
 # Handle entity updating and movement
 func updateEntities(delta):
 	for entity in get_tree().get_nodes_in_group("Entity"):
 		entity.update(delta)
-		entity.set_pos(entity.get_pos() + entity.velocity * delta)
+		entity.move(entity.velocity * delta)
 		
 # Set crosshair to mouse's position and make player look at crosshair's direction
 func updateCrosshair():
@@ -36,7 +50,7 @@ func updateCrosshair():
 	# Flip player if crosshair is behind
 	if ((playerNode.orientation == playerNode.ORIENTATION_LEFT and lookDirection > 0) 
 	or (playerNode.orientation == playerNode.ORIENTATION_RIGHT and lookDirection < 0)):
-		playerNode.scale(Vector2(-1, 1))
+		playerNode.get_node("monkey_sprite").scale(Vector2(-1, 1))
 		playerNode.orientation = 1 if playerNode.orientation == 0 else 0  # Switch orientation
 
 # If shooting is not on cooldown, shoot a projectile in the crosshair's direction
@@ -48,9 +62,11 @@ func handleShooting(delta):
 		var shootDirection = (mousePos - playerPos).normalized()
 		var poopNode = poop.instance()
 		add_child(poopNode)
-		poopNode.set_pos(playerPos)
+		var offset = shootDirection.normalized() * 35
+		poopNode.set_pos(playerPos + offset)
 		poopNode.call("setVelocity", shootDirection)
 		poopNode.add_to_group("Entity")
+		poopNode.add_to_group("Projectile")
 		counter = 0
 		
 func updateAI():
