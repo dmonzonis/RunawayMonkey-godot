@@ -5,6 +5,7 @@ var shootingSpeed = 500
 
 func _ready():
 	speed = 250
+	health = 3
 	
 func modifyVelocity(delta):
 	velocity = Vector2(0, 0)
@@ -26,3 +27,10 @@ func lookAt(direction):
 	or (orientation == ORIENTATION_RIGHT and direction < 0)):
 		get_node("monkey_sprite").scale(Vector2(-1, 1))
 		orientation = 1 if orientation == 0 else 0  # Switch orientation
+		
+func damage(amount):
+	health -= amount
+	get_node("sound").play("chimp_cry")
+	if health <= 0:
+		# TODO: die
+		pass

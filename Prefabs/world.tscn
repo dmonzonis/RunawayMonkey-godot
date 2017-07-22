@@ -40,4 +40,12 @@ texture = ExtResource( 4 )
 
 transform/pos = Vector2( 153.884, 675.258 )
 
+[node name="snatcher1" parent="TileMap" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 257.519, 595.681 )
+
+[node name="snatcher2" parent="TileMap" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 492.549, 656.751 )
+
 

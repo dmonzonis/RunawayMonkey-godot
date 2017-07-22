@@ -24,7 +24,7 @@ func handleCollisions():
 	if playerNode.is_colliding():
 		var other = playerNode.get_collider()
 		if other.is_in_group("Enemy"):
-			# TODO: damage player
+			playerNode.damage(1)
 			other.queue_free()
 	for projectile in get_tree().get_nodes_in_group("Projectile"):
 		if projectile.is_colliding():
