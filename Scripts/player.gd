@@ -10,13 +10,14 @@ func _ready():
 func modifyVelocity(delta):
 	velocity = Vector2(0, 0)
 	if (Input.is_action_pressed("move_up")):
-		velocity.y -= speed
+		velocity.y -= 1
 	if (Input.is_action_pressed("move_down")):
-		velocity.y += speed
+		velocity.y += 1
 	if (Input.is_action_pressed("move_left")):
-		velocity.x -= speed
+		velocity.x -= 1
 	if (Input.is_action_pressed("move_right")):
-		velocity.x += speed
+		velocity.x += 1
+	velocity = velocity.normalized() * speed
 
 func update(delta):
 	modifyVelocity(delta)
