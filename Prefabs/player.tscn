@@ -18,22 +18,23 @@ samples/chimp_cry = {
 "sample": ExtResource( 3 )
 }
 
-[node name="player" type="KinematicBody2D"]
+[node name="player" type="Area2D"]
 
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-collision/margin = 0.08
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
 script/script = ExtResource( 1 )
 
-[node name="monkey_sprite" type="Sprite" parent="."]
+[node name="sprite" type="Sprite" parent="."]
 
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="collision" type="CollisionShape2D" parent="."]
 
 shape = SubResource( 1 )
 trigger = false
@@ -50,7 +51,7 @@ config/polyphony = 1
 config/samples = SubResource( 2 )
 config/pitch_random = 0.0
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="camera" type="Camera2D" parent="."]
 
 anchor_mode = 1
 rotating = false
@@ -68,5 +69,9 @@ drag_margin/left = 0.2
 drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
+
+[connection signal="area_enter" from="." to="." method="_on_player_area_enter"]
+
+[connection signal="body_enter" from="." to="." method="_on_player_body_enter"]
 
 

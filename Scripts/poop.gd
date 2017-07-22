@@ -18,3 +18,9 @@ func update(delta):
 	lifeCounter += delta
 	if lifeCounter >= LIFETIME:
 		self.queue_free()
+
+
+func _on_poop_area_enter(area):
+	if area.is_in_group("Enemy"):
+		area.damage(1) # TODO: change depending on projectile type
+		queue_free()

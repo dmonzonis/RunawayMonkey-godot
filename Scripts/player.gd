@@ -25,7 +25,7 @@ func update(delta):
 func lookAt(direction):
 	if ((orientation == ORIENTATION_LEFT and direction > 0) 
 	or (orientation == ORIENTATION_RIGHT and direction < 0)):
-		get_node("monkey_sprite").scale(Vector2(-1, 1))
+		get_node("sprite").scale(Vector2(-1, 1))
 		orientation = 1 if orientation == 0 else 0  # Switch orientation
 		
 func damage(amount):
@@ -34,3 +34,8 @@ func damage(amount):
 	if health <= 0:
 		# TODO: die
 		pass
+
+func _on_player_area_enter(area):
+	if area.is_in_group("Enemy"):
+		damage(1) # TODO: change damage depending on enemy
+		area.queue_free()

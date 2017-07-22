@@ -22,7 +22,6 @@ func _fixed_process(delta):
 	updateEntities(delta)
 	updateCrosshair()
 	handleShooting(delta)
-	handleCollisions()
 	
 	# DEBUG: show fps
 	debugCounter += 1
@@ -33,32 +32,12 @@ func _fixed_process(delta):
 		debugCounter = 0
 		fps = 0
 
-func handleCollisions():
-	if playerNode.is_colliding():
-		var other = playerNode.get_collider()
-		if other.is_in_group("Enemy"):
-			playerNode.damage(1)
-			other.queue_free()
-	for enemy in get_tree().get_nodes_in_group("Enemy"):
-		if enemy.is_colliding():
-			var other = enemy.get_collider()
-			if other == playerNode:
-				playerNode.damage(1)
-				enemy.queue_free()
-	for projectile in get_tree().get_nodes_in_group("Projectile"):
-		if projectile.is_colliding():
-			# If poop touches enemy, damage it
-			var other = projectile.get_collider()
-			if other.is_in_group("Enemy"):
-				other.queue_free()
-				projectile.queue_free()
-
 # Handle entity updating and movement
 func updateEntities(delta):
 	for entity in get_tree().get_nodes_in_group("Entity"):
 		entity.update(delta)
 		# TODO: change move for translate when using Area2D instead of Kinematic2D
-		entity.move(entity.velocity * delta)
+		entity.translate(entity.velocity * delta)
 		
 # Set crosshair to mouse's position and make player look at crosshair's direction
 func updateCrosshair():
