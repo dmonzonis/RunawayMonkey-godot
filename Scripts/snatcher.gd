@@ -12,6 +12,7 @@ func _ready():
 func update(delta):
 	var direction = (playerPos - get_pos()).normalized()
 	velocity = direction * speed
+	lookAt(direction.x)
 		
 func getPlayerPosition(position):
 	playerPos = position
