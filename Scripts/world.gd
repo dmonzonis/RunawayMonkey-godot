@@ -38,6 +38,12 @@ func handleCollisions():
 		if other.is_in_group("Enemy"):
 			playerNode.damage(1)
 			other.queue_free()
+	for enemy in get_tree().get_nodes_in_group("Enemy"):
+		if enemy.is_colliding():
+			var other = enemy.get_collider()
+			if other == playerNode:
+				playerNode.damage(1)
+				enemy.queue_free()
 	for projectile in get_tree().get_nodes_in_group("Projectile"):
 		if projectile.is_colliding():
 			# If poop touches enemy, damage it
