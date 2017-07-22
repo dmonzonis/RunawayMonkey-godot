@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://Scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://Images/monkey.png" type="Texture" id=2]
 [ext_resource path="res://Sounds/chimp_cry.wav" type="Sample" id=3]
+[ext_resource path="res://Sounds/pulse.wav" type="Sample" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -16,6 +17,12 @@ samples/chimp_cry = {
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 3 )
+}
+samples/pulse = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
 }
 
 [node name="player" type="Area2D"]

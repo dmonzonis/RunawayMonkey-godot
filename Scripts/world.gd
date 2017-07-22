@@ -28,7 +28,7 @@ func _fixed_process(delta):
 	fps += 1 / delta
 	if debugCounter > 15:
 		fps /= debugCounter
-		playerNode.get_node("debugLabel").set_text("FPS: " + str(fps))
+		playerNode.get_node("debugLabel").set_text("FPS: " + str(fps) + "\nHP: " + str(playerNode.health))
 		debugCounter = 0
 		fps = 0
 

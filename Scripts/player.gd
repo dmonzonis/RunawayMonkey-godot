@@ -4,7 +4,9 @@ var cooldown = 0.3
 
 func _ready():
 	speed = 250
-	health = 3
+	maxHealth = 3
+	health = maxHealth
+	add_to_group("Player")
 	
 func modifyVelocity(delta):
 	velocity = Vector2(0, 0)
@@ -30,10 +32,15 @@ func lookAt(direction):
 		
 func damage(amount):
 	health -= amount
-	get_node("sound").play("chimp_cry")
+	if amount > 0:
+		get_node("sound").play("chimp_cry")
 	if health <= 0:
-		# TODO: die
-		pass
+		# Restart the game
+		# TODO: send to a game over screen
+		var currentScene = get_tree().get_current_scene().get_filename()
+		get_tree().change_scene(currentScene)
+	if health >= maxHealth:
+		health = maxHealth
 
 func _on_player_area_enter(area):
 	if area.is_in_group("Enemy"):

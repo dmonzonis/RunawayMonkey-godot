@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://Resources/grass_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Scripts/world.gd" type="Script" id=2]
 [ext_resource path="res://Images/crosshair.png" type="Texture" id=3]
 [ext_resource path="res://Prefabs/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/snatcher.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prefabs/healkit.tscn" type="PackedScene" id=6]
 
 [node name="world" type="Node2D"]
 
@@ -42,11 +43,12 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = -537.775
-margin/top = -471.987
-margin/right = -402.775
-margin/bottom = -407.987
-text = "FPS: 0"
+margin/left = -496.0
+margin/top = -394.0
+margin/right = -361.0
+margin/bottom = -330.0
+text = "FPS: 0
+HP: 3"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -54,5 +56,21 @@ max_lines_visible = -1
 [node name="snatcher" parent="TileMap" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 206.838, 194.359 )
+
+[node name="snatcher 2" parent="TileMap" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 660.829, 736.913 )
+
+[node name="snatcher 3" parent="TileMap" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 799.456, 118.94 )
+
+[node name="healkit" parent="TileMap" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 739.329, 489.724 )
+
+[node name="healkit 2" parent="TileMap" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( -60.6949, 738.583 )
 
 

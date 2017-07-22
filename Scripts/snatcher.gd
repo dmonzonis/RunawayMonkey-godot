@@ -4,7 +4,8 @@ var playerPos = Vector2(0, 0)
 
 func _ready():
 	speed = 150
-	health = 3
+	maxHealth = 3
+	health = maxHealth
 	add_to_group("Entity")
 	add_to_group("Enemy")
 	
