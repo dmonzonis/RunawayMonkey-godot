@@ -8,6 +8,10 @@ var playerNode
 var counter = 0
 var mousePos = Vector2(-100, -100)
 
+# DEBUG variables
+var debugCounter = 0
+var fps = 0
+
 func _ready():
 	playerNode = get_node("player")
 	playerNode.add_to_group("Entity")
@@ -19,6 +23,14 @@ func _process(delta):
 	updateCrosshair()
 	handleShooting(delta)
 	handleCollisions()
+	# DEBUG: show fps
+	debugCounter += 1
+	fps += 1 / delta
+	if debugCounter > 15:
+		fps /= debugCounter
+		get_node("debugLabel").set_text("FPS: " + str(fps))
+		debugCounter = 0
+		fps = 0
 
 func handleCollisions():
 	if playerNode.is_colliding():
