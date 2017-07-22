@@ -1,7 +1,6 @@
 extends "entity.gd"
 
-var cooldown = 0.30
-var shootingSpeed = 500
+var cooldown = 0.3
 
 func _ready():
 	speed = 250
