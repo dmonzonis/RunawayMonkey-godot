@@ -29,7 +29,7 @@ script/script = ExtResource( 2 )
 
 [node name="player" parent="TileMap" instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 95.7678, 98.1679 )
+transform/pos = Vector2( 473.464, 333.007 )
 
 [node name="crosshair" type="Sprite" parent="TileMap"]
 
@@ -38,6 +38,6 @@ texture = ExtResource( 4 )
 
 [node name="snatcher" parent="TileMap" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 509.635, 371.763 )
+transform/pos = Vector2( 153.884, 675.258 )
 
 

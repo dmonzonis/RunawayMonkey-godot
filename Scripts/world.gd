@@ -11,8 +11,6 @@ var mousePos = Vector2(-100, -100)
 func _ready():
 	playerNode = get_node("player")
 	playerNode.add_to_group("Entity")
-	get_node("snatcher").add_to_group("Enemy")
-	get_node("snatcher").add_to_group("Entity")
 	set_process(true)
 
 func _process(delta):
@@ -34,6 +32,7 @@ func handleCollisions():
 			var other = projectile.get_collider()
 			if other.is_in_group("Enemy"):
 				other.queue_free()
+				projectile.queue_free()
 
 # Handle entity updating and movement
 func updateEntities(delta):
@@ -65,8 +64,6 @@ func handleShooting(delta):
 		var offset = shootDirection.normalized() * 35
 		poopNode.set_pos(playerPos + offset)
 		poopNode.call("setVelocity", shootDirection)
-		poopNode.add_to_group("Entity")
-		poopNode.add_to_group("Projectile")
 		counter = 0
 		
 func updateAI():
