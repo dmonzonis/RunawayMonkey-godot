@@ -3,8 +3,10 @@ extends Node2D
 const player = preload("res://Prefabs/player.tscn")
 const poop = preload("res://Prefabs/poop.tscn")
 const snatcher = preload("res://Prefabs/snatcher.tscn")
+const dog = preload("res://Prefabs/dog.tscn")
 
 const SPAWN_TIME = 1
+const enemyList = [snatcher, dog]
 
 var playerNode
 var counter = 0
@@ -78,6 +80,6 @@ func spawnEnemies(delta):
 		spawnTimer = 0
 		var spawnPoints = get_node("spawnPoints").get_children()
 		var spawner = spawnPoints[randi() % spawnPoints.size()]
-		var newEnemy = snatcher.instance()
+		var newEnemy = enemyList[randi() % enemyList.size()].instance()
 		add_child(newEnemy)
 		newEnemy.set_pos(spawner.get_pos())
