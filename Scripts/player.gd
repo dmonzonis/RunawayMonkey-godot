@@ -19,3 +19,10 @@ func modifyVelocity(delta):
 
 func update(delta):
 	modifyVelocity(delta)
+
+# Look at left or right, depending on direction, which is the x coordinate of the looking direction
+func lookAt(direction):
+	if ((orientation == ORIENTATION_LEFT and direction > 0) 
+	or (orientation == ORIENTATION_RIGHT and direction < 0)):
+		get_node("monkey_sprite").scale(Vector2(-1, 1))
+		orientation = 1 if orientation == 0 else 0  # Switch orientation

@@ -47,10 +47,7 @@ func updateCrosshair():
 	crosshair.set_pos(mousePos)
 	var lookDirection = crosshair.get_pos().x - playerNode.get_pos().x
 	# Flip player if crosshair is behind
-	if ((playerNode.orientation == playerNode.ORIENTATION_LEFT and lookDirection > 0) 
-	or (playerNode.orientation == playerNode.ORIENTATION_RIGHT and lookDirection < 0)):
-		playerNode.get_node("monkey_sprite").scale(Vector2(-1, 1))
-		playerNode.orientation = 1 if playerNode.orientation == 0 else 0  # Switch orientation
+	playerNode.call("lookAt", lookDirection)
 
 # If shooting is not on cooldown, shoot a projectile in the crosshair's direction
 func handleShooting(delta):
