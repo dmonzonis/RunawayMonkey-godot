@@ -83,3 +83,28 @@ func spawnEnemies(delta):
 		var newEnemy = enemyList[randi() % enemyList.size()].instance()
 		add_child(newEnemy)
 		newEnemy.set_pos(spawner.get_pos())
+		
+# Returns a dict containing the coordinates of the top-left of the map
+# and its dimensions
+func calculate_bounds():
+	var used_cells = get_used_cells()
+	var min_x = used_cells[0].x
+	var min_y = used_cells[0].y
+	var max_x = min_x
+	var max_y = min_y
+	for pos in used_cells:
+		if pos.x < min_x:
+			min_x = int(pos.x)
+		elif pos.x > max_x:
+			max_x = int(pos.x)
+		if pos.y < min_y:
+			min_y = int(pos.y)
+		elif pos.y > max_y:
+			max_y = int(pos.y)
+	return {
+		x = min_x,
+		y = min_y,
+		width = max_x - min_x + 1,
+		height = max_y - min_y + 1
+    	}
+
