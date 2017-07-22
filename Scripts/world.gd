@@ -15,20 +15,21 @@ var fps = 0
 func _ready():
 	playerNode = get_node("player")
 	playerNode.add_to_group("Entity")
-	set_process(true)
+	set_fixed_process(true)
 
-func _process(delta):
+func _fixed_process(delta):
 	updateAI()
 	updateEntities(delta)
 	updateCrosshair()
 	handleShooting(delta)
 	handleCollisions()
+	
 	# DEBUG: show fps
 	debugCounter += 1
 	fps += 1 / delta
 	if debugCounter > 15:
 		fps /= debugCounter
-		get_node("debugLabel").set_text("FPS: " + str(fps))
+		playerNode.get_node("debugLabel").set_text("FPS: " + str(fps))
 		debugCounter = 0
 		fps = 0
 
@@ -56,6 +57,7 @@ func handleCollisions():
 func updateEntities(delta):
 	for entity in get_tree().get_nodes_in_group("Entity"):
 		entity.update(delta)
+		# TODO: change move for translate when using Area2D instead of Kinematic2D
 		entity.move(entity.velocity * delta)
 		
 # Set crosshair to mouse's position and make player look at crosshair's direction
