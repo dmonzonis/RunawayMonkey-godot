@@ -4,9 +4,12 @@ const player = preload("res://Prefabs/player.tscn")
 const poop = preload("res://Prefabs/poop.tscn")
 const snatcher = preload("res://Prefabs/snatcher.tscn")
 
+const SPAWN_TIME = 1
+
 var playerNode
 var counter = 0
 var mousePos = Vector2(-100, -100)
+var spawnTimer = 1
 
 # DEBUG variables
 var debugCounter = 0
@@ -22,6 +25,7 @@ func _fixed_process(delta):
 	updateEntities(delta)
 	updateCrosshair()
 	handleShooting(delta)
+	spawnEnemies(delta)
 	
 	# DEBUG: show fps
 	debugCounter += 1
@@ -66,3 +70,14 @@ func updateAI():
 	# Inform enemies of player's current position
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		enemy.getPlayerPosition(playerNode.get_pos())
+		
+func spawnEnemies(delta):
+	spawnTimer += delta
+	if spawnTimer >= SPAWN_TIME:
+		# Select a random spawn point and spawn an enemy
+		spawnTimer = 0
+		var spawnPoints = get_node("spawnPoints").get_children()
+		var spawner = spawnPoints[randi() % spawnPoints.size()]
+		var newEnemy = snatcher.instance()
+		add_child(newEnemy)
+		newEnemy.set_pos(spawner.get_pos())
