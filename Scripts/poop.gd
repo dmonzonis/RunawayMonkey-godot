@@ -2,6 +2,7 @@ extends "entity.gd"
 
 const LIFETIME = 1.5
 var lifeCounter
+var damage = 1
 
 func _ready():
 	speed = 500
@@ -21,5 +22,6 @@ func update(delta):
 
 func _on_poop_area_enter(area):
 	if area.is_in_group("Enemy"):
-		area.damage(1) # TODO: change depending on projectile type
+		area.damage(damage)
+		damage = 0
 		queue_free()
